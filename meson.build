@@ -39,6 +39,7 @@ add_project_arguments(
         '-Wno-missing-field-initializers',
 
         '-fno-common',
+        '-fcf-protection=full',
         '-fstack-protector',
         '-fstack-protector-strong',
         ]

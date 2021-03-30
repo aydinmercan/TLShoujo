@@ -1,5 +1,5 @@
 shoujo_src += files([
     'probe.c',
-    'spinlock.S',
+    'core_lock.c',
     'cpuid.S',
 ])

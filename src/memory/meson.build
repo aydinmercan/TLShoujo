@@ -1,4 +1,4 @@
-shoujo_src += files(
+shoujo_src += files([
     'compare.c',
     'wipe.c',
-)
+])
