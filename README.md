@@ -11,7 +11,6 @@ The following are required:
 
 * A (modern) C17 compiler.
 * Meson build *>=0.55*
-* POSIX Threads
 
 ## Roadmap
 * PEM formatting
