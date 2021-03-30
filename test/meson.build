@@ -1,7 +1,7 @@
 test_core = executable(
     'test_core',
     'test_core.c',
-    include_directories: shoujo_include_dir,
+    include_directories: shoujo_inc,
     dependencies: tlshoujo,
 )
 

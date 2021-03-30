@@ -1,6 +1,7 @@
-#include <tlshoujo/memory.h>
+#include "tlshoujo/memory.h"
 
-int shoujo_memory_compare(const void * eval1, const void * eval2, const size_t len) {
+int __attribute__((pure))
+shoujo_memory_compare(const void * eval1, const void * eval2, const size_t len) {
     const volatile uint8_t * volatile x1 = (const volatile uint8_t * volatile) eval1;
     const volatile uint8_t * volatile x2 = (const volatile uint8_t * volatile) eval2;
     volatile uint8_t tmp                 = 0U;
@@ -13,7 +14,7 @@ int shoujo_memory_compare(const void * eval1, const void * eval2, const size_t l
     return (1 & ((tmp - 1) >> 8)) - 1;
 }
 
-int shoujo_memory_is_zero(const void * const eval, const size_t len) {
+int __attribute__((pure)) shoujo_memory_is_zero(const void * const eval, const size_t len) {
     volatile uint8_t tmp = 0U;
 
     (void) eval;

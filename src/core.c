@@ -1,11 +1,12 @@
 #include "tlshoujo/core.h"
 
+#include "internal/impl.h"
 #include "tlshoujo/probe.h"
 
-static volatile int initialized = 0;
+volatile int _initialized = 0;
 
 int shoujo_init(void) {
-    if (initialized != 0) {
+    if (_initialized != 0) {
         return 1;
     }
 
@@ -13,7 +14,9 @@ int shoujo_init(void) {
         return -1;
     }
 
-    initialized = 1;
+    //   _probe_chacha20_best();
+
+    _initialized = 1;
 
     return 0;
 }

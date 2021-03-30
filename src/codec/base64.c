@@ -1,1 +1,3 @@
-#include <tlshoujo/codec.h>
+#include "tlshoujo/codec.h"
+
+struct shoujo_pem;

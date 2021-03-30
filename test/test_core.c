@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <tlshoujo.h>
 
-static __attribute__((always_inline)) void _probe(int (*test)(void), const char * name) {
+static void __attribute__((always_inline)) _probe(int (*test)(void), const char * name) {
     printf("Querying %s... ", name);
     printf("%s\n", test() ? "FOUND" : "MISSING");
 }
@@ -13,6 +13,18 @@ int main(int argc, char ** argv) {
 
     if (shoujo_init() < 0) {
         perror("init");
+        exit(EXIT_FAILURE);
+    }
+
+    switch (shoujo_init()) {
+    case 1:
+        printf("Second init OK\n");
+        break;
+    case 0:
+        printf("Second init acts like 1st?????\n");
+        break;
+    case -1:
+        perror("second init");
         exit(EXIT_FAILURE);
     }
 

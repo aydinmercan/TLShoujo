@@ -2,8 +2,8 @@
 
 #include <stdint.h>
 
-#define FEAT_EBX_AVX2  (0x00000020)
 #define FEAT_EBX_SHANI (0x20000000)
+#define FEAT_EBX_AVX2  (0x00000020)
 
 #define FEAT_ECX_SSE3    (0x00000001)
 #define FEAT_ECX_CLMUL   (0x00000002)
@@ -33,13 +33,7 @@ static int _shani = 0;
 static int _avx   = 0;
 static int _avx2  = 0;
 
-static void _cpuid(uint32_t info[static 4], const uint32_t type) {
-    __asm__ volatile("xchgq %%rbx, %q1;"
-                     "cpuid;"
-                     "xchgq %%rbx, %q1;"
-                     : "=a"(info[0]), "=&r"(info[1]), "=c"(info[2]), "=d"(info[3])
-                     : "0"(type), "2"(0U));
-}
+extern void _cpuid(uint32_t info[static 4], const uint32_t type);
 
 int __attribute__((flatten)) shoujo_probe_cpu_features(void) {
     uint32_t info[4] = {0}, xcr0 = 0U, id = 0U;
@@ -53,20 +47,45 @@ int __attribute__((flatten)) shoujo_probe_cpu_features(void) {
 
     _cpuid(info, 1U);
 
-    _sse2  = ((info[3] & FEAT_EDX_SSE2) != 0x00);
-    _sse3  = ((info[2] & FEAT_ECX_SSE3) != 0x00);
-    _ssse3 = ((info[2] & FEAT_ECX_SSSE3) != 0x00);
-    _sse41 = ((info[2] & FEAT_ECX_SSE41) != 0x00);
+#ifndef COMPTIME_NO_SSE2
+    _sse2 = ((info[3] & FEAT_EDX_SSE2) != 0x00);
+#endif
 
+#ifndef COMPTIME_NO_SSE3
+    _sse3 = ((info[2] & FEAT_ECX_SSE3) != 0x00);
+#endif
+
+#ifndef COMPTIME_NO_SSSE3
+    _ssse3 = ((info[2] & FEAT_ECX_SSSE3) != 0x00);
+#endif
+
+#ifndef COMPTIME_NO_SSE41
+    _sse41 = ((info[2] & FEAT_ECX_SSE41) != 0x00);
+#endif
+
+#ifndef COMPTIME_NO_CLMUL
     _clmul = ((info[2] & FEAT_ECX_CLMUL) != 0x00);
+#endif
+
+#ifndef COMPTIME_NO_AESNI
     _aesni = ((info[2] & FEAT_ECX_AESNI) != 0x00);
+#endif
+
+#ifndef COMPTIME_NO_AVX
+    _avx = ((info[2] & FEAT_ECX_AVX) != 0x00);
+#endif
 
     info[0] = info[1] = info[2] = info[3] = 0;
 
     _cpuid(info, 7U);
 
-    _shani = ((info[1] & FEAT_EBX_SHANI) != 0x00);
-    _avx2  = ((info[1] & FEAT_EBX_AVX2) != 0x00);
+#ifndef COMPTIME_NO_SHANI
+    _shani = ((info[1] & FEAT_ECX_AESNI) != 0x00);
+#endif
+
+#ifndef COMPTIME_NO_AVX2
+    _avx2 = ((info[1] & FEAT_EBX_AVX2) != 0x00);
+#endif
 
     (void) xcr0;
 
