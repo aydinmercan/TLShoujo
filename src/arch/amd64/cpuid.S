@@ -10,8 +10,8 @@ _cpuid:
     xchg rsi, rbx
     cpuid
     xchg rsi, rbx
-    mov dword ptr [rdi], eax
-    mov dword ptr [rdi + 4], esi
-    mov dword ptr [rdi + 8], ecx
-    mov dword ptr [rdi + 12], edx
+    mov DWORD PTR [rdi], eax
+    mov DWORD PTR [rdi + 4], esi
+    mov DWORD PTR [rdi + 8], ecx
+    mov DWORD PTR [rdi + 12], edx
     ret
