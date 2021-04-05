@@ -2,8 +2,8 @@ project(
     'tlshoujo',
     'c',
     license: 'BSD-3-Clause',
-    meson_version: '>=0.55.0',
-    default_options: [
+    meson_version : '>=0.55.0',
+    default_options : [
         'c_std=c17',
         'b_pie=true',
         'warning_level=3',
@@ -54,9 +54,12 @@ option_names = [
     'shani',
 ]
 
+add_project_arguments('-D_POSIX_C_SOURCE=200809L', language : 'c')
+add_project_arguments('-D_DEFAULT_SOURCE', language : 'c')
+
 foreach opt : option_names
     if get_option(opt).disabled()
-        add_project_arguments('-DCOMPTIME_NO_@0@'.format(opt.to_upper()), language: 'c')
+        add_project_arguments('-DCOMPTIME_NO_@0@'.format(opt.to_upper()), language : 'c')
     endif
 endforeach
 
@@ -70,12 +73,12 @@ shoujo_inc = include_directories('.', 'include')
 shoujo_lib = shared_library(
     'tlshoujo',
     shoujo_src,
-    include_directories: shoujo_inc,
+    include_directories : shoujo_inc,
 )
 
 tlshoujo = declare_dependency(
-	link_with: shoujo_lib,
-	include_directories: shoujo_inc,
+	link_with : shoujo_lib,
+	include_directories : shoujo_inc,
 )
 
 subdir('test')
