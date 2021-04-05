@@ -46,34 +46,21 @@ add_project_arguments(
     ), language: 'c'
 )
 
-option_names = [
-    'ssse3',
-    'avx',
-    'avx2',
-    'aesni',
-    'shani',
-]
-
 add_project_arguments('-D_POSIX_C_SOURCE=200809L', language : 'c')
 add_project_arguments('-D_DEFAULT_SOURCE', language : 'c')
 
-foreach opt : option_names
-    if get_option(opt).disabled()
-        add_project_arguments('-DCOMPTIME_NO_@0@'.format(opt.to_upper()), language : 'c')
-    endif
-endforeach
-
 shoujo_src = []
+shoujo_inc = include_directories('.', 'include')
+internal_inc = []
 
 subdir('src')
 
 
-shoujo_inc = include_directories('.', 'include')
 
 shoujo_lib = shared_library(
     'tlshoujo',
     shoujo_src,
-    include_directories : shoujo_inc,
+    include_directories : [shoujo_inc, internal_inc]
 )
 
 tlshoujo = declare_dependency(
