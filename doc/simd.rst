@@ -1,9 +1,9 @@
 .. _shoujosimd:
 
-SIMD Supported Operations
-=========================
+SIMD Supported (Non-cryptographic) Operations
+=============================================
 
-Carry-less Multiplication
+Carryless Multiplication
 -------------------------
 
 Rotation/Shuffling
