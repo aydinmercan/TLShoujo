@@ -42,6 +42,8 @@ add_project_arguments(
         '-fcf-protection=full',
         '-fstack-protector',
         '-fstack-protector-strong',
+
+        '-masm=intel',
         ]
     ), language: 'c'
 )

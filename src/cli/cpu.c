@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <tlshoujo.h>
 
-static void __attribute__((always_inline)) _probe(int (*test)(void), const char * name) {
+static inline void _probe(int (*test)(void), const char * name) {
     printf("Querying %s... ", name);
     printf("%s\n", test() ? "FOUND" : "MISSING");
 }

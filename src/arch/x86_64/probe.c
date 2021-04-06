@@ -12,8 +12,8 @@
 // clang-format off
 #define CPU_DEFINE(name)                                                                     \
     static int _ ## name = 0;                                                                \
-    int __attribute__((always_inline)) shoujo_probe_query_ ## name(void) { return _##name; } \
-    int __attribute__((always_inline)) shoujo_probe_query_ ## name(void) // Shitty hack for semicolon
+    int shoujo_probe_query_ ## name(void) { return _##name; } \
+    int shoujo_probe_query_ ## name(void) // Shitty hack for semicolon
 
 #define CPU_QUERY(target, register, bitflag)                \
     do {                                                    \
