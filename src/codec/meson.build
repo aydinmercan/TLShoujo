@@ -1,3 +1,5 @@
-shoujo_src += files([
+shoujo_src += files(
+    [
     'base64.c',
-])
+    ]
+)

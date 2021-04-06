@@ -1,8 +1,10 @@
-shoujo_src += files([
+shoujo_src += files(
+    [
     'probe.c',
     'core_lock.c',
     'cpuid.S',
-])
+    ]
+)
 
 
 internal_inc += include_directories('.')
