@@ -11,3 +11,4 @@ int shoujo_probe_query_aesni(void);
 int shoujo_probe_query_shani(void);
 int shoujo_probe_query_avx(void);
 int shoujo_probe_query_avx2(void);
+int shoujo_probe_query_avx512f(void);

@@ -17,7 +17,8 @@ static void cmd_cpu_print_all(void) {
     _probe(shoujo_probe_query_aesni, "AES-NI");
     _probe(shoujo_probe_query_shani, "SHA-NI");
     _probe(shoujo_probe_query_avx, "AVX");
-    _probe(shoujo_probe_query_avx2, "AVX2");
+    _probe(shoujo_probe_query_avx2, "AVX-2");
+    _probe(shoujo_probe_query_avx512f, "AVX-512 Foundation");
 }
 
 int command_cpu(int argc, char ** argv) {

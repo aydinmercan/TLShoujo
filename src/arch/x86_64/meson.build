@@ -17,6 +17,7 @@ x86_64_feat = [
     'avx2',
     'aesni',
     'shani',
+    'avx512f',
 ]
 
 arch_feat_dict = {}

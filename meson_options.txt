@@ -7,6 +7,7 @@ option('ssse3', type : 'feature', value: 'enabled', description : 'Include SSSE3
 option('sse41', type : 'feature', value: 'enabled', description : 'Include SSE4.1 code at runtime')
 option('clmul', type : 'feature', value: 'enabled', description : 'Include CLMUL code at runtime')
 option('avx', type : 'feature', value : 'enabled', description : 'Include AVX code at runtime')
-option('avx2', type : 'feature', value : 'enabled', description : 'Include AVX2 code at runtime')
+option('avx2', type : 'feature', value : 'enabled', description : 'Include AVX-2 code at runtime')
+option('avx512f', type : 'feature', value : 'enabled', description : 'Include AVX-512 Foundation code at runtime')
 option('aesni', type : 'feature', value : 'enabled', description : 'Include AES-NI code at runtime')
 option('shani', type : 'feature', value : 'enabled', description : 'Include SHA-NI code at runtime')
