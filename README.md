@@ -26,7 +26,8 @@ The following are required:
 * X.509 Validation
 * Client/Server Hello
 * Client/Server Handshake
-* (...)
+* Simple CLI tool (debugging friendly)
+* [...]
 
 ## License
 This repository is licensed under the BSD-3-Clause. Refer to `LICENSE.md` for more details.

@@ -37,9 +37,3 @@ x86_64
 
 (Draft) RISC-V
 -----------------
-
-.. code-block:: c
-   int shoujo_probe_query_riscv_sha256(void);
-   int shoujo_probe_query_rotate(void);
-   int shoujo_probe_query_permute(void);
-   int shoujo_probe_query_clmul(void);

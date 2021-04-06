@@ -51,11 +51,12 @@ add_project_arguments('-D_DEFAULT_SOURCE', language : 'c')
 
 shoujo_src = []
 shoujo_inc = include_directories('.', 'include')
+
 internal_inc = []
 
+cli_src = []
+
 subdir('src')
-
-
 
 shoujo_lib = shared_library(
     'tlshoujo',
@@ -69,3 +70,12 @@ tlshoujo = declare_dependency(
 )
 
 subdir('test')
+
+if get_option('cli').enabled()
+  shoujo_cli = executable(
+      'shoujo',
+      cli_src,
+      include_directories : [ './src/cli', shoujo_inc ],
+      dependencies : tlshoujo,
+  )
+endif

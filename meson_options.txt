@@ -1,8 +1,11 @@
-option('sse2', type : 'feature', value: 'enabled', description : 'Invclude SSE2 code at runtime')
-option('sse3', type : 'feature', value: 'enabled', description : 'Invclude SSE3 code at runtime')
-option('ssse3', type : 'feature', value: 'enabled', description : 'Invclude SSSE3 code at runtime')
-option('sse41', type : 'feature', value: 'enabled', description : 'Invclude SSE4.1 code at runtime')
-option('clmul', type : 'feature', value: 'enabled', description : 'Invclude CLMUL code at runtime')
+option('cli', type : 'feature', value : 'enabled', description : 'Build CLI tool')
+
+# Architecture specific. Ignored if not applicable for target
+option('sse2', type : 'feature', value: 'enabled', description : 'Include SSE2 code at runtime')
+option('sse3', type : 'feature', value: 'enabled', description : 'Include SSE3 code at runtime')
+option('ssse3', type : 'feature', value: 'enabled', description : 'Include SSSE3 code at runtime')
+option('sse41', type : 'feature', value: 'enabled', description : 'Include SSE4.1 code at runtime')
+option('clmul', type : 'feature', value: 'enabled', description : 'Include CLMUL code at runtime')
 option('avx', type : 'feature', value : 'enabled', description : 'Include AVX code at runtime')
 option('avx2', type : 'feature', value : 'enabled', description : 'Include AVX2 code at runtime')
 option('aesni', type : 'feature', value : 'enabled', description : 'Include AES-NI code at runtime')

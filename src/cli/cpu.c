@@ -1,5 +1,6 @@
+#include "cpu.h"
+
 #include <stdio.h>
-#include <stdlib.h>
 #include <tlshoujo.h>
 
 static void __attribute__((always_inline)) _probe(int (*test)(void), const char * name) {
@@ -7,27 +8,7 @@ static void __attribute__((always_inline)) _probe(int (*test)(void), const char 
     printf("%s\n", test() ? "FOUND" : "MISSING");
 }
 
-int main(int argc, char ** argv) {
-    (void) argc;
-    (void) argv;
-
-    if (shoujo_init() < 0) {
-        perror("init");
-        exit(EXIT_FAILURE);
-    }
-
-    switch (shoujo_init()) {
-    case 1:
-        printf("Second init OK\n");
-        break;
-    case 0:
-        printf("Second init acts like 1st?????\n");
-        break;
-    case -1:
-        perror("second init");
-        exit(EXIT_FAILURE);
-    }
-
+static void cmd_cpu_print_all(void) {
     _probe(shoujo_probe_query_sse2, "SSE2");
     _probe(shoujo_probe_query_sse3, "SSE3");
     _probe(shoujo_probe_query_ssse3, "SSSE3");
@@ -37,6 +18,13 @@ int main(int argc, char ** argv) {
     _probe(shoujo_probe_query_shani, "SHA-NI");
     _probe(shoujo_probe_query_avx, "AVX");
     _probe(shoujo_probe_query_avx2, "AVX2");
+}
+
+int command_cpu(int argc, char ** argv) {
+    (void) argc;
+    (void) argv;
+
+    cmd_cpu_print_all();
 
     return 0;
 }

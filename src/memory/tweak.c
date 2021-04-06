@@ -4,7 +4,7 @@
 #include "tlshoujo/memory.h"
 
 int shoujo_memory_lock(void * const ptr, const size_t len) {
-#if defined(HAVE_MADVISE) && defined(MADV_DONTDUMP)
+#if defined(HAVE_MADVISE) && defined(MADV_DONTDUMP) && defined(NDEBUG)
     (void) madvise(ptr, len, MADV_DONTDUMP);
 #endif
 
@@ -17,7 +17,7 @@ int shoujo_memory_lock(void * const ptr, const size_t len) {
 }
 
 int shoujo_memory_unlock(void * const ptr, const size_t len) {
-#if defined(MADVISE_DUMP) && defined(MADV_DODUMP)
+#if defined(HAVE_MADVISE) && defined(MADV_DODUMP) && defined(NDEBUG)
     (void) madvise(ptr, len, MADV_DODUMP);
 #endif
 
