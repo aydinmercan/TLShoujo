@@ -1,7 +1,5 @@
 #include "tlshoujo/probe.h"
 
-#include <stdint.h>
-
 #include "config.h"
 
 #define EAX (0)
@@ -10,10 +8,10 @@
 #define EDX (3)
 
 // clang-format off
-#define CPU_DEFINE(name)                                      \
-    static int _ ## name = 0;                                 \
-    int shoujo_probe_query_ ## name(void) { return _##name; } \
-    int shoujo_probe_query_ ## name(void) // Shitty hack for semicolon
+#define CPU_DEFINE(name)                                           \
+    static uint32_t _ ## name = 0;                                 \
+    uint32_t shoujo_probe_query_ ## name(void) { return _##name; } \
+    uint32_t shoujo_probe_query_ ## name(void) // Shitty hack for semicolon
 
 #define CPU_QUERY(target, register, bitflag)                \
     do {                                                    \
@@ -34,14 +32,14 @@ CPU_DEFINE(avx512f);
 
 extern void _cpuid(uint32_t info[static 4], const uint32_t type);
 
-int __attribute__((flatten)) shoujo_probe_cpu_features(void) {
+uint32_t __attribute__((flatten)) shoujo_probe_cpu_features(void) {
     uint32_t info[4] = {0}, xcr0 = 0U, id = 0U;
 
     // Check if we can use CPUID properly
     _cpuid(info, 0U);
     id = info[EAX];
     if (id == 0U) {
-        return -1;
+        return 0;
     }
 
     // Reset and get feature bits
@@ -66,7 +64,7 @@ int __attribute__((flatten)) shoujo_probe_cpu_features(void) {
 
     (void) xcr0;
 
-    return 0;
+    return 1;
 }
 
 #undef EAX

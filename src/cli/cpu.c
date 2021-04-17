@@ -3,9 +3,9 @@
 #include <stdio.h>
 #include <tlshoujo.h>
 
-static inline void _probe(int (*test)(void), const char * name) {
+static inline void _probe(uint32_t (*test)(void), const char * name) {
     printf("Querying %s... ", name);
-    printf("%s\n", test() ? "FOUND" : "MISSING");
+    printf("%s\n", (test() == 1) ? "FOUND" : "MISSING");
 }
 
 static void cmd_cpu_print_all(void) {

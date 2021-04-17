@@ -1,3 +1,6 @@
 #pragma once
 
-int shoujo_init(void);
+#include <stddef.h>
+#include <stdint.h>
+
+uint32_t shoujo_init(void);

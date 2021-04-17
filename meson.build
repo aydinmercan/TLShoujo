@@ -6,8 +6,10 @@ project(
     default_options : [
         'c_std=c17',
         'b_pie=true',
+        'b_asneeded=true',
+        'b_staticpic=true',
         'warning_level=3',
-        'werror=true'
+        'werror=false'
     ],
 )
 
@@ -57,6 +59,7 @@ shoujo_inc = include_directories('.', 'include')
 internal_inc = []
 
 cli_src = []
+cli_inc = []
 
 subdir('src')
 
@@ -77,7 +80,7 @@ if get_option('cli').enabled()
   shoujo_cli = executable(
       'shoujo',
       cli_src,
-      include_directories : [ './src/cli', shoujo_inc ],
+      include_directories : [ cli_inc, shoujo_inc ],
       dependencies : tlshoujo,
   )
 endif

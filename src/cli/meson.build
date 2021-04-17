@@ -5,3 +5,5 @@ cli_src += files(
     'help.c',
     ]
 )
+
+cli_inc += include_directories('.')

@@ -23,7 +23,7 @@ static const struct subcommand _cmd[] = {
 int main(int argc, char ** argv) {
     size_t i, name_len;
 
-    if (shoujo_init() != 0) {
+    if (shoujo_init() == 0) {
         fprintf(stderr, "[ CRIT ] Library initializtion failed\n");
         abort();
     }
