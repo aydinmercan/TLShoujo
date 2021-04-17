@@ -1,7 +1,7 @@
 project(
     'tlshoujo',
     'c',
-    license: 'BSD-3-Clause',
+    license : 'BSD-3-Clause',
     meson_version : '>=0.55.0',
     default_options : [
         'c_std=c17',
@@ -9,7 +9,7 @@ project(
         'b_asneeded=true',
         'b_staticpic=true',
         'warning_level=3',
-        'werror=false'
+        'werror=true',
     ],
 )
 
@@ -47,7 +47,7 @@ add_project_arguments(
 
         '-masm=intel',
         ]
-    ), language: 'c'
+    ), language : 'c'
 )
 
 add_project_arguments('-D_POSIX_C_SOURCE=200809L', language : 'c')
