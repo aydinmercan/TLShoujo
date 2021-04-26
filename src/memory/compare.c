@@ -8,7 +8,7 @@ uint32_t shoujo_memory_compare(const void * eval1, const void * eval2, const siz
     size_t i;
 
     for (i = 0U; i < len; i++) {
-        ctl |= x1[i] ^ x2[i];
+        ctl |= (uint8_t) ((uint8_t) x1[i] ^ (uint8_t)x2[i]);
     }
 
     return shoujo_u8_is_zero(ctl);

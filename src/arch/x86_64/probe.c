@@ -13,10 +13,12 @@
     uint32_t shoujo_probe_query_ ## name(void) { return _##name; } \
     uint32_t shoujo_probe_query_ ## name(void) // Shitty hack for semicolon
 
-#define CPU_QUERY(target, register, bitflag)                \
-    do {                                                    \
-        _ ## target = ((info[register] & bitflag) != 0x00); \
-    } while (CPU_QUERY_COMPTIME_FLAG_ ## target)
+#define CPU_QUERY(target, register, bitflag)                    \
+    do {                                                        \
+        if (CPU_QUERY_COMPTIME_FLAG_ ## target == 1) {          \
+            _ ## target = ((info[register] & bitflag) != 0x00); \
+        }                                                       \
+    } while (0)
 // clang-format on
 
 CPU_DEFINE(sse2);
