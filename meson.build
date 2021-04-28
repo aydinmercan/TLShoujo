@@ -47,14 +47,22 @@ add_project_arguments(
         '-fstack-protector',
         '-fstack-protector-strong',
 
-        '-z,noexecstack',
-        '-z,noexecheap',
-        '-z,relro',
-
         '-masm=intel',
         ]
     ), language : 'c'
 )
+
+add_project_link_arguments(
+    cc.get_supported_link_arguments(
+        [
+        '-Wl,-z,noexecstack',
+        '-Wl,-z,noexecheap',
+        '-Wl,-z,relro',
+        ]
+    ), language : 'c'
+)
+
+
 
 add_project_arguments('-D_POSIX_C_SOURCE=200809L', language : 'c')
 add_project_arguments('-D_DEFAULT_SOURCE', language : 'c')
