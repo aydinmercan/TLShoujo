@@ -18,16 +18,18 @@ cc = meson.get_compiler('c')
 add_project_arguments(
     cc.get_supported_arguments(
         [
-        '-Wundef',
         '-Walloca',
         '-Wcast-align',
         '-Wconversion',
-        '-Wtrampolines',
-        '-Woverflow',
-        '-Wuninitialized',
-        '-Winit-self',
         '-Wendif-labels',
+        '-Winit-self',
+        '-Woverflow',
+        '-Wundef',
+        '-Wuninitialized',
+        '-Wtrampolines',
         '-Wwrite-strings',
+        '-Wformat=2',
+        '-Wformat-security',
         '-Wmissing-prototypes',
         '-Wmissing-include-dirs',
         '-Wstrict-prototypes',
@@ -44,6 +46,10 @@ add_project_arguments(
         '-fcf-protection=full',
         '-fstack-protector',
         '-fstack-protector-strong',
+
+        '-z,noexecstack',
+        '-z,noexecheap',
+        '-z,relro',
 
         '-masm=intel',
         ]
