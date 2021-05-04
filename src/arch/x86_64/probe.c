@@ -34,39 +34,40 @@ CPU_DEFINE(avx512f);
 
 extern void _cpuid(uint32_t info[static 4], const uint32_t type);
 
-uint32_t __attribute__((flatten)) shoujo_probe_cpu_features(void) {
-    uint32_t info[4] = {0}, xcr0 = 0U, id = 0U;
+uint32_t __attribute__((flatten)) shoujo_probe_cpu_features(void)
+{
+	uint32_t info[4] = {0}, xcr0 = 0U, id = 0U;
 
-    // Check if we can use CPUID properly
-    _cpuid(info, 0U);
-    id = info[EAX];
-    if (id == 0U) {
-        return 0;
-    }
+	// Check if we can use CPUID properly
+	_cpuid(info, 0U);
+	id = info[EAX];
+	if (id == 0U) {
+		return 0;
+	}
 
-    // Reset and get feature bits
-    info[0] = info[1] = info[2] = info[3] = 0;
-    _cpuid(info, 1U);
+	// Reset and get feature bits
+	info[0] = info[1] = info[2] = info[3] = 0;
+	_cpuid(info, 1U);
 
-    CPU_QUERY(sse2, EDX, 0x04000000);
-    CPU_QUERY(sse3, ECX, 0x00000001);
-    CPU_QUERY(ssse3, ECX, 0x00000200);
-    CPU_QUERY(sse41, ECX, 0x0080000);
-    CPU_QUERY(clmul, ECX, 0x00000002);
-    CPU_QUERY(aesni, ECX, 0x02000000);
-    CPU_QUERY(avx, ECX, 0x10000000);
+	CPU_QUERY(sse2, EDX, 0x04000000);
+	CPU_QUERY(sse3, ECX, 0x00000001);
+	CPU_QUERY(ssse3, ECX, 0x00000200);
+	CPU_QUERY(sse41, ECX, 0x0080000);
+	CPU_QUERY(clmul, ECX, 0x00000002);
+	CPU_QUERY(aesni, ECX, 0x02000000);
+	CPU_QUERY(avx, ECX, 0x10000000);
 
-    // Reset and get extended feature bits
-    info[0] = info[1] = info[2] = info[3] = 0;
-    _cpuid(info, 7U);
+	// Reset and get extended feature bits
+	info[0] = info[1] = info[2] = info[3] = 0;
+	_cpuid(info, 7U);
 
-    CPU_QUERY(shani, EBX, 0x20000000);
-    CPU_QUERY(avx2, EBX, 0x00000020);
-    CPU_QUERY(avx512f, EBX, (1 << 16));
+	CPU_QUERY(shani, EBX, 0x20000000);
+	CPU_QUERY(avx2, EBX, 0x00000020);
+	CPU_QUERY(avx512f, EBX, (1 << 16));
 
-    (void) xcr0;
+	(void) xcr0;
 
-    return 1;
+	return 1;
 }
 
 #undef EAX

@@ -1,11 +1,8 @@
-shoujo_src += files(
-    [
-    'probe.c',
-    'core_lock.c',
-    'cpuid.S',
-    ]
-)
-
+shoujo_src += files([
+	'probe.c',
+	'core_lock.c',
+	'cpuid.S',
+])
 
 internal_inc += include_directories('.')
 
@@ -26,13 +23,12 @@ arch_feat_dict = {}
 
 foreach feat : x86_64_feat
     if get_option(feat).disabled()
-        arch_feat_dict += { 'CPU_QUERY_COMPTIME_FLAG_@0@'.format(feat) : 0 }
+        arch_feat_dict += {'CPU_QUERY_COMPTIME_FLAG_@0@'.format(feat) : 0}
     else
-        arch_feat_dict += { 'CPU_QUERY_COMPTIME_FLAG_@0@'.format(feat) : 1 }
+        arch_feat_dict += {'CPU_QUERY_COMPTIME_FLAG_@0@'.format(feat) : 1}
     endif
 endforeach
 
-configure_file(
-    output : 'config.h',
-    configuration : configuration_data(arch_feat_dict),
+configure_file(output : 'config.h',
+               configuration : configuration_data(arch_feat_dict),
 )

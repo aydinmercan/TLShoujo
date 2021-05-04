@@ -1,3 +1,3 @@
 #pragma once
 
-int command_cpu(int argc, char ** argv);
+int command_cpu(int argc, char **argv);
